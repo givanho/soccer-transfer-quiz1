@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "soccer-transfer-quiz1",
+    "name": "soccer transfer quiz",
     "slug": "soccer-transfer-quiz1",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -8,7 +8,7 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": [
@@ -21,10 +21,21 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.raiden1993.soccertransferquiz1"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3e4253f8-ddda-47ea-a21d-b269ff4f5c74"
+      }
     }
+   
+    
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-8287537826529861~4961891529"
   }
 }
