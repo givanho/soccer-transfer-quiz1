@@ -862,7 +862,7 @@ style={{width:55, height:55, borderRadius:100,
         </View>
       :
       <View>
-      {quizdata[currentQuestion].options.map((option, index) => (
+      {  quizdata [currentQuestion].options.map((option, index) => (
         <TouchableHighlight
        
           key={index}
