@@ -51,7 +51,7 @@ const TransferQuiz = () => {
   //Modal
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [overVisible, setOverVisible] = useState(false);
-
+const [lives, setLives] = useState(3)
   // sound
   const [sound1, setSound1] = useState();
   const [sound2, setSound2] = useState();
@@ -91,6 +91,10 @@ const [eliminatedOptions, setEliminatedOptions] = useState([]);
       console.error('Error loading user data:', error);
     }
   };
+  // useEffect(() => {
+  //   setCurrentQuestion(Math.floor(Math.random() * quizdata.length));
+  // }, [quizdata]);
+
 
 // audio
 
@@ -148,12 +152,19 @@ const wrongAnswer = async () => {
         setHighScore(score + 1)
       }
     } else {
+      
       wrongAnswer()
-    overModalOn();
+      setLives((prev) => prev -1);
+      if(lives <= 1){
+         overModalOn();
     saveUserData();
+    setLives(3)
+      }
+   
     }
     // Move to the next question
-    setCurrentQuestion(currentQuestion + 1);
+    setCurrentQuestion(Math.floor(Math.random() * quizdata.length));
+    shuffleArray(quizdata)
     handleReset();
     saveUserData();
     if (currentQuestion === quizdata.length - 1) {
@@ -257,10 +268,22 @@ const wrongAnswer = async () => {
         setTime((prevTime) => {
           if (prevTime <= 0) {
             clearInterval(interval);
-            setIsActive(false);
+          setIsActive(false);
+
             // Handle quiz time expiration here
-            overModalOn();
-            saveUserData();
+            if(lives <= 1){
+               overModalOn();
+               saveUserData();
+               }
+               else{
+                setLives((prev) => prev -1);
+                wrongAnswer();
+                  setTime(initialTime);
+    setIsActive(true);
+                setCurrentQuestion(Math.floor(Math.random() * quizdata.length));
+
+               }
+           
           }
           return prevTime - 1;
         });
@@ -268,7 +291,7 @@ const wrongAnswer = async () => {
     }
 
     return () => clearInterval(interval);
-  }, [isActive]);
+  }, [isActive, time]);
   
 
   const handlePauseResume = () => {
@@ -589,12 +612,13 @@ disabled={loading}
               setCurrentQuestion(0);
             }
             else{
-              setCurrentQuestion(currentQuestion + 1);
+              setCurrentQuestion(Math.floor(Math.random() * quizdata.length));
 
             }
             setScore(0);
             handleReset();
           overModalOff();
+          setLives(3)
         }}
            style={{flexDirection:'row',justifyContent:'center', alignItems:'center'}}>
       <Image
@@ -683,6 +707,16 @@ disabled={loading}
             {hint}
           </Text>
           </View>
+<View style={{flexDirection:'row'}}>
+{lives < 1? <Ionicons  name="heart-outline" size={24} color='#f9022b' /> :
+ <Ionicons  name="heart" size={24} color='#f9022b' />} 
+ {lives < 2? <Ionicons  name="heart-outline" size={24} color='#f9022b' /> :
+ <Ionicons  name="heart" size={24} color='#f9022b' />} 
+{lives < 3? <Ionicons  name="heart-outline" size={24} color='#f9022b' /> :
+ <Ionicons  name="heart" size={24} color='#f9022b' />} 
+
+</View>
+
           <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
  <Image
             source={champ}
@@ -797,7 +831,7 @@ style={{width:55, height:55, borderRadius:100,
        
 
 <View>
-        <Text style={{fontFamily:'Champions-bold',textAlign:'center', fontSize:25, color:'white'}}>{time}</Text>
+        <Text style={{fontFamily:'Champions-bold',textAlign:'center', fontSize:25, color:time<=10?'red':'white'}}>{time}</Text>
       <View style={{flexDirection:'row', marginRight:10}}>
       <Image
             source={shoes}

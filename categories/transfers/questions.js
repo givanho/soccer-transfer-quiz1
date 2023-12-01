@@ -89,7 +89,7 @@ const quizdata = [
           require("../../assets/france/psg.png"),
           require("../../assets/others/Al-hilal.png"),
         ],
-        options: ["Erling Haaland", "Neymar Jr", "Mario Balotelli", "Jerome Boateng"],
+        options: ["Zlatan Ibrahimovic", "Neymar Jr", "Lionel Messi", "Luis Suarez"],
         answer: "Neymar Jr"
       },
       {
@@ -555,7 +555,7 @@ const quizdata = [
         answer: "Miroslav Klose"
       },
       {
-        id: 50,
+        id: 51,
         questionImages: [
           require("../../assets/England/Southampton.png"),
           require("../../assets/England/Liverpool.png"),
@@ -566,7 +566,7 @@ const quizdata = [
         answer: "Sadio Mane"
       },
       {
-        id: 51,
+        id: 52,
         questionImages: [
           require("../../assets/germany/dortmud.png"),
           require("../../assets/germany/Ahlen.png"),
@@ -577,7 +577,7 @@ const quizdata = [
         answer: "Marco Reus"
       },
       {
-        id: 52,
+        id: 53,
         questionImages: [
           require("../../assets/others/fernabache.png"),
           require("../../assets/france/psg.png"),
@@ -587,17 +587,7 @@ const quizdata = [
         options: ["Jay Jay Okocha", "Claude Makelele", " Djibril Cisse", "Alou Diarra"],
         answer: "Jay Jay Okocha"
       },
-      {
-        id: 53,
-        questionImages: [
-          require("../../assets/others/lokomotiv-moscow.png"),
-          require("../../assets/England/chelsea.png"),
-          require("../../assets/others/zenith.png"),
-          require("../../assets/England/westbrom.png"),
-        ],
-        options: ["Adrian Mutu", "Steve Sidwell", "Branislav Ivanovic", "Ricardo Carvalho"],
-        answer: "Branislav Ivanovic"
-      },
+     
       {
         id: 54,
         questionImages: [
@@ -1279,6 +1269,83 @@ const quizdata = [
         ],
         options: ["Andre Gomes", "Yerry Mina", "Gerard Deulofeu", "Lucas Digne"],
         answer: "Gerard Deulofeu"
+      },
+      {
+        id: 116,
+        questionImages: [
+          require("../../assets/others/lokomotiv-moscow.png"),
+          require("../../assets/England/chelsea.png"),
+          require("../../assets/others/zenith.png"),
+          require("../../assets/England/westbrom.png"),
+        ],
+        options: ["Adrian Mutu", "Steve Sidwell", "Branislav Ivanovic", "Ricardo Carvalho"],
+        answer: "Branislav Ivanovic"
+      },
+      {
+        id: 117,
+        questionImages: [
+          require("../../assets/germany/weder-bremen.png"),
+          require("../../assets/germany/bayern-munich.png"),
+          require("../../assets/England/chelsea.png"),
+          require("../../assets/germany/weder-bremen.png"),
+        ],
+        options: ["Arjen Robben", "Claudio Pizarro", "Kai Havertz", "Van Buyten"],
+        answer: "Claudio Pizarro"
+      },
+      {
+        id: 118,
+        questionImages: [
+          require("../../assets/germany/bayer-leverkusen.png"),
+          require("../../assets/England/chelsea.png"),
+          require("../../assets/germany/wolfsburg.png"),
+          require("../../assets/germany/dortmud.png"),
+        ],
+        options: ["Kevin De Bruyne", "Timo Werner", "Michael Ballack", "André Schürrle"],
+        answer: "André Schürrle"
+      },
+      {
+        id: 119,
+        questionImages: [
+          require("../../assets/Netherlands/PSV.png"),
+          require("../../assets/Spain/barcelona.png"),
+          require("../../assets/England/stoke.png"),
+          require("../../assets/Netherlands/PSV.png"),
+        ],
+        options: ["Luuk de Jong", "Ibrahim Afellay", "Memphis Depay", "Mark van Bommel"],
+        answer: "Ibrahim Afellay"
+      },
+      {
+        id: 120,
+        questionImages: [
+          require("../../assets/England/mancity.png"),
+          require("../../assets/England/burnley.png"),
+          require("../../assets/England/tottenham.png"),
+          require("../../assets/others/Celtic.png"),
+        ],
+        options: ["Joe Hart", "Vedran Corluka", "Scott Parker", "Kyle Walker"],
+        answer: "Joe Hart"
+      },
+      {
+        id: 121,
+        questionImages: [
+          require("../../assets/Spain/lacoruna.png"),
+          require("../../assets/Spain/realmadrid.png"),
+          require("../../assets/England/Liverpool.png"),
+          require("../../assets/England/WestHam.png"),
+        ],
+        options: ["Xabi Alonso", "Fernando Morientes", "Steve McManaman", "Álvaro Arbeloa"],
+        answer: "Álvaro Arbeloa"
+      },
+      {
+        id: 122,
+        questionImages: [
+          require("../../assets/Spain/lacoruna.png"),
+          require("../../assets/Spain/realmadrid.png"),
+          require("../../assets/England/Liverpool.png"),
+          require("../../assets/England/WestHam.png"),
+        ],
+        options: ["Xabi Alonso", "Fernando Morientes", "Steve McManaman", "Álvaro Arbeloa"],
+        answer: "Álvaro Arbeloa"
       },
 ]
 
