@@ -1,6 +1,12 @@
 import { useCallback, useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button,TouchableOpacity, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Button,TouchableOpacity, } from 'react-native';
+import {
+  SafeAreaView,
+  SafeAreaProvider,
+  SafeAreaInsetsContext,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import 'expo-dev-client';
@@ -15,7 +21,6 @@ SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   // const [loading, setLoading] = useState(false);
-
   const [fontsLoaded, fontError] = useFonts({
     'Champions-regular': require('./assets/fonts/4181-font.ttf'),
     'Champions-bold': require('./assets/fonts/4180-font.ttf'),
@@ -35,40 +40,6 @@ export default function App() {
     return null;
   }
 
-  // const showRewardedAd = () => {
-  //   setLoading(true);
-  //   const rewarded = RewardedAd.createForAdRequest(adUnitId, {
-  //     requestNonPersonalizedAdsOnly: true,
-  //     keywords: ['fashion', 'clothing'],
-  //   });
-
-  //   const unsubscribeLoaded = rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => {
-  //     rewarded.show();
-  //   });
-
-  //   const unsubscribeEarned = rewarded.addAdEventListener(
-    
-  //     RewardedAdEventType.EARNED_REWARD,
-  //     reward => {
-  //       console.log('User earned reward of ', reward);
-  //       setLoading(false)
-  //     },
-    
-
-  //   );
-    
-    
-
-  //   rewarded.load();
-    
-
-  //   // Unsubscribe from events on unmount
-  //   return () => {
-  //     unsubscribeLoaded();
-  //     unsubscribeEarned();
-  //   };
-
-  // };
 
   const getData = async () => {
     try {
@@ -83,23 +54,32 @@ export default function App() {
 
 
   return (
-    <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
-    <View >
-      <TransferQuiz />
-      {/* <TextQuiz /> */}
-
+   
+    <View style={styles.container} onLayout={onLayoutRootView}>
       
-        <StatusBar style="light" transculent={true} hidden={false} backgroundColor='rgba(255,255,255, 0.1)' />
+    
+      <View style={styles.fullScreen}>
+       <StatusBar backgroundColor='rgba(247, 15, 255, 0)' style='' hidden={false}/>
+       <SafeAreaView >
+        <TransferQuiz />
+        </SafeAreaView>
+      </View>
+      {/* <TextQuiz /> */}
     </View>
-    </SafeAreaView>
-  );
+   
+      
+);
 }
 
 const styles = StyleSheet.create({
-  container: {
-    width:'100%',
-    backgroundColor: '#080a36',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+container: {
+  
+  paddingTop:-20,
+  flex:1
+},
+fullScreen: {
+  ...StyleSheet.absoluteFillObject,
+  
+  
+},
 });

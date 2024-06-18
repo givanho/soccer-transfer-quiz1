@@ -10,7 +10,8 @@ import {
   Button,
   ActivityIndicator
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef} from "react";
+import LottieView from 'lottie-react-native';
 import { Audio } from 'expo-av';
 import Constants from 'expo-constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -20,6 +21,7 @@ import { BannerAd, BannerAdSize, TestIds, RewardedAd,  RewardedAdEventType } fro
 import GameOver from '../../GameOver'
 import UseHints from '../../UseHints'
 import {vw} from '../../Dimensions'
+import * as Animatable from 'react-native-animatable';
 const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
 const adUnitIds = __DEV__ ? TestIds.REWARDED : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
 const stadium =  require("../../assets/championsback.jpg");
@@ -58,6 +60,26 @@ const [lives, setLives] = useState(3)
 // 550/50
 const [userClicked, setUserClicked] = useState(false);
 const [eliminatedOptions, setEliminatedOptions] = useState([]);
+const imageRef = useRef(null);
+const imageRef1 = useRef(null);
+const imageRef2 = useRef(null);
+const imageRef3 = useRef(null);
+
+
+useEffect(() => {
+  if (imageRef.current) {
+    imageRef.current.fadeInLeft(150); // Reset the animation
+  }
+  if (imageRef1.current) {
+    imageRef1.current.fadeInRight(200); // Reset the animation
+  }
+  if (imageRef2.current) {
+    imageRef2.current.fadeInLeft(250); // Reset the animation
+  }
+  if (imageRef3.current) {
+    imageRef3.current.fadeInRight(300); // Reset the animation
+  }
+}, [currentQuestion]);
 
 
   //async storage
@@ -157,8 +179,9 @@ const wrongAnswer = async () => {
       setLives((prev) => prev -1);
       if(lives <= 1){
          overModalOn();
-    saveUserData();
-    setLives(3)
+         setIsActive(false);
+         saveUserData();
+    
       }
    
     }
@@ -170,6 +193,7 @@ const wrongAnswer = async () => {
     if (currentQuestion === quizdata.length - 1) {
       setCurrentQuestion(0);
     }
+   
   };
 
   //handle 50/50 answer
@@ -272,6 +296,8 @@ const wrongAnswer = async () => {
 
             // Handle quiz time expiration here
             if(lives <= 1){
+              setLives((prev) => prev -1);
+              wrongAnswer();
                overModalOn();
                saveUserData();
                }
@@ -536,7 +562,7 @@ alignItems:'center'}}>
         hintLogic(10);
         // Check the condition based on which modalOn or modalOff is called
         if (hint < 10) {
-          overModalOn();
+         return false
         } else {
         
           overModalOff();
@@ -575,7 +601,7 @@ disabled={loading}
        onPress={() => {
         setIsActive(false);
         showRewardedAd(2)
-      
+      setLives(1)
       }}
          style={{ alignItems:'center', 
          flexDirection:'column',}} >
@@ -679,6 +705,7 @@ disabled={loading}
         <Text style={{fontFamily:'Champions-regular',paddingLeft:5, fontSize:15, color:'#5ff5da'}}>More Hints</Text>
             </TouchableOpacity>
        
+       
         </View>
       </View>
 
@@ -707,7 +734,9 @@ disabled={loading}
             {hint}
           </Text>
           </View>
+          <View style={{height:24}}>
 <View style={{flexDirection:'row'}}>
+
 {lives < 1? <Ionicons  name="heart-outline" size={24} color='#f9022b' /> :
  <Ionicons  name="heart" size={24} color='#f9022b' />} 
  {lives < 2? <Ionicons  name="heart-outline" size={24} color='#f9022b' /> :
@@ -716,7 +745,7 @@ disabled={loading}
  <Ionicons  name="heart" size={24} color='#f9022b' />} 
 
 </View>
-
+</View>
           <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
  <Image
             source={champ}
@@ -732,28 +761,36 @@ disabled={loading}
 </View>
 
       <View style={{flex:1, justifyContent:'center',  }} >
-     
 <Text style={{fontFamily:'score', fontSize:20, textAlign:'center', color:'#5ff5da'}}> Guess the player!</Text>
         <View
         style={styles.imageGrid}>
           
-        <View
+        <View 
           style={[styles.imageRows, {paddingTop:15}]}
         >
-          <Image
+      
+
+          <Animatable.Image ref={imageRef} animation="fadeInLeft" duration="1000" easing="ease-in"
             source={quizdata[currentQuestion].questionImages[0]}
             style={styles.imageItem}
           />
-           <Image
-            source={arrow}
-            style={{width:35,height:25, }}
-            
-          />
+
+<LottieView
+  source={require("../../assets/orangearrow.json")}
+  style={{width:80, transform: [{ rotate: '135deg'}]}}
+  autoPlay
+  loop
+/>
+
+        
           {/* <FontAwesome5 name="angle-double-right" size={42} color="#ff6969" /> */}
-          <Image
+          <Animatable.Image ref={imageRef1} animation="fadeInRight" duration="1000" easing="ease-in"
             source={quizdata[currentQuestion].questionImages[1]}
             style={styles.imageItem}
           />
+
+
+         
         </View>
         
         <View 
@@ -777,32 +814,39 @@ disabled={loading}
             alignItems:'center',
             marginVertical:16
           }}>
-             <Image
-            source={arrow}
-            style={{width:35,height:25,  transform: [{ rotate: '90deg'}]}}
-            
-          />
+           <LottieView
+  source={require("../../assets/orangearrow.json")}
+  style={{width:80}}
+  autoPlay
+  loop
+/>
           
            </View>
         </View>
         <View
            style={[styles.imageRows, {paddingBottom:15}]}
         >
-          <Image
+        <Animatable.Image ref={imageRef2} animation="fadeInLeft" duration="1000" easing="ease-in"
             source={quizdata[currentQuestion].questionImages[3]}
             style={styles.imageItem}
           />
-            <Image
-            source={arrow}
-            style={{width:35,height:25,  transform: [{ rotate: '180deg'}]}}
-            
-          />
+
+          
+<LottieView
+  source={require("../../assets/orangearrow.json")}
+  style={{width:80, transform: [{ rotate: '45deg'}]}}
+  autoPlay
+  loop
+/>
           {/* <FontAwesome5 name="angle-double-left" size={42} color="#ff6969" /> */}
 
-          <Image
+
+
+          <Animatable.Image ref={imageRef3} animation="fadeInRight" duration="1000" easing="ease-in"
             source={quizdata[currentQuestion].questionImages[2]}
             style={styles.imageItem}
           />
+          
         </View>
 
         </View>
@@ -924,7 +968,7 @@ style={{width:55, height:55, borderRadius:100,
       </View>
 
 
-<View >
+<View style={{height:60}} >
      <BannerAd
       unitId={adUnitId}
       size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
@@ -945,6 +989,7 @@ style={{width:55, height:55, borderRadius:100,
 
 const styles = StyleSheet.create({
   container: {
+    
     flex:1,
     width:'100%',
     backgroundColor: '#080a36',
